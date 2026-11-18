@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager: Vibe Coding vs AI Pair Programming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --vibe-accent: #6366f1;
+      --pair-accent: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    .card-vibe::before {
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+    }
+    .card-pair::before {
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .card-vibe .tag { color: #818cf8; }
+    .card-pair .tag { color: #60a5fa; }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .metrics {
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .metric-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .metric-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 4px;
+    }
+    .features-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .features-list li::before {
+      content: '✓ ';
+      color: #10b981;
+      font-weight: bold;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-vibe {
+      background: #4f46e5;
+      color: #fff;
+    }
+    .btn-vibe:hover {
+      background: #4338ca;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+    .btn-pair {
+      background: #2563eb;
+      color: #fff;
+    }
+    .btn-pair:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="pill">Assignment Showcase · RadiantHAL</div>
+    <h1>Task Manager Architecture Study</h1>
+    <p class="lead">
+      Comparing autonomous prompt-driven <strong>Vibe Coding</strong> (v0 by Vercel) vs developer-in-the-loop <strong>AI Pair Programming</strong> (Cursor) on the exact same task manager feature set.
+    </p>
+  </div>
+
+  <div class="grid">
+    <!-- Vibe Card -->
+    <div class="card card-vibe">
+      <span class="tag">Approach 1: Autonomous Generation</span>
+      <h2>Vibe Version (v0.dev)</h2>
+      <p style="font-size: 13px; color: var(--text-muted);">
+        Generated completely in one natural-language prompt without manual code edits.
+      </p>
+
+      <div class="metrics">
+        <div class="metric-box">
+          <div class="metric-label">Build Time</div>
+          <div class="metric-value">3m 45s</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Files Generated</div>
+          <div class="metric-value">16 Files</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Code Volume</div>
+          <div class="metric-value">412 Lines</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">UI Primitives</div>
+          <div class="metric-value">5 shadcn-UI</div>
+        </div>
+      </div>
+
+      <ul class="features-list">
+        <li>Add task with title</li>
+        <li>Mark task complete with custom checkbox</li>
+        <li>Filter by All / Active / Completed</li>
+        <li>Rich card layout with badge state tags</li>
+      </ul>
+
+      <a href="./vibe/" class="btn btn-vibe" target="_blank" rel="noopener noreferrer">
+        Launch Live Vibe App &rarr;
+      </a>
+    </div>
+
+    <!-- Pair Card -->
+    <div class="card card-pair">
+      <span class="tag">Approach 2: Inline AI Assistant</span>
+      <h2>Pair Version (Cursor)</h2>
+      <p style="font-size: 13px; color: var(--text-muted);">
+        Crafted deliberately by the developer using Cursor inline code completions.
+      </p>
+
+      <div class="metrics">
+        <div class="metric-box">
+          <div class="metric-label">Build Time</div>
+          <div class="metric-value">26m 10s</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Source Files</div>
+          <div class="metric-value">5 Files</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Code Volume</div>
+          <div class="metric-value">178 Lines</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Dependencies</div>
+          <div class="metric-value">Zero UI Bloat</div>
+        </div>
+      </div>
+
+      <ul class="features-list">
+        <li>Add task with title</li>
+        <li>Mark task complete with semantic input</li>
+        <li>Filter by All / Active / Completed</li>
+        <li>Crisp semantic HTML and accessible controls</li>
+      </ul>
+
+      <a href="./pair/" class="btn btn-pair" target="_blank" rel="noopener noreferrer">
+        Launch Live Pair App &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Repository: <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair" target="_blank">github.com/RadiantHAL/task-manager-vibe-vs-pair</a></p>
+    <p style="margin-top: 6px; font-size: 12px; color: #64748b;">Both applications adhere strictly to the exact 3-feature specification with zero additions and zero removals.</p>
+  </div>
+</body>
+</html>
