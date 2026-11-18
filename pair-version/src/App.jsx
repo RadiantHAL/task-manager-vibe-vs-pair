@@ -73,7 +73,7 @@ export default function App() {
 
         <footer className="card-footer">
           <span>{counts.active} active tasks remaining</span>
-          <span>5 Source Files · Zero UI bloat</span>
+          <span>7 Clean Files in src/ · Zero UI Bloat</span>
         </footer>
       </main>
     </div>

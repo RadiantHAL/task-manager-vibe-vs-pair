@@ -30,8 +30,8 @@
     }
     .header {
       text-align: center;
-      max-width: 800px;
-      margin-bottom: 40px;
+      max-width: 840px;
+      margin-bottom: 36px;
     }
     .pill {
       display: inline-block;
@@ -61,6 +61,79 @@
       color: var(--text-muted);
       line-height: 1.6;
     }
+
+    /* Video Player Section */
+    .video-section {
+      width: 100%;
+      max-width: 960px;
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+    .video-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .video-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .video-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #1e1b4b;
+      color: #a5b4fc;
+      border: 1px solid #4338ca;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      outline: none;
+    }
+    .video-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .download-btn {
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .download-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -133,6 +206,11 @@
       color: #fff;
       margin-top: 4px;
     }
+    .metric-sub {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
     .features-list {
       list-style: none;
       font-size: 13px;
@@ -197,6 +275,31 @@
     </p>
   </div>
 
+  <!-- Video Demonstration Section -->
+  <div class="video-section">
+    <div class="video-header">
+      <div class="video-title">
+        <span>Video Demonstration & Architectural Walkthrough</span>
+        <span class="video-badge">2m 47s · Full 1080p</span>
+      </div>
+      <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair/releases/download/v1.0.0/task-manager-demo.mp4" class="download-btn" download>
+        ⬇ Download MP4 (4 MB)
+      </a>
+    </div>
+
+    <div class="video-wrapper">
+      <video controls preload="metadata">
+        <source src="./video/task-manager-demo.mp4" type="video/mp4">
+        Your browser does not support the HTML5 video tag. You can <a href="./video/task-manager-demo.mp4">download the video directly</a>.
+      </video>
+    </div>
+
+    <div class="video-footer">
+      <span>Covers: Approach Definitions · Live App Demos · Build Differences · Comparison Table · Recommendations</span>
+      <span>Permanent Link: <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair/releases/tag/v1.0.0" target="_blank">GitHub Release v1.0.0</a></span>
+    </div>
+  </div>
+
   <div class="grid">
     <!-- Vibe Card -->
     <div class="card card-vibe">
@@ -210,18 +313,22 @@
         <div class="metric-box">
           <div class="metric-label">Build Time</div>
           <div class="metric-value">3m 45s</div>
+          <div class="metric-sub">Single prompt</div>
         </div>
         <div class="metric-box">
-          <div class="metric-label">Files Generated</div>
-          <div class="metric-value">16 Files</div>
+          <div class="metric-label">Files in src/</div>
+          <div class="metric-value">15 Files</div>
+          <div class="metric-sub">18 files total</div>
         </div>
         <div class="metric-box">
           <div class="metric-label">Code Volume</div>
-          <div class="metric-value">412 Lines</div>
+          <div class="metric-value">712 Lines</div>
+          <div class="metric-sub">src/ total</div>
         </div>
         <div class="metric-box">
           <div class="metric-label">UI Primitives</div>
           <div class="metric-value">5 shadcn-UI</div>
+          <div class="metric-sub">Autonomous wrappers</div>
         </div>
       </div>
 
@@ -249,18 +356,22 @@
         <div class="metric-box">
           <div class="metric-label">Build Time</div>
           <div class="metric-value">26m 10s</div>
+          <div class="metric-sub">17 manual edits</div>
         </div>
         <div class="metric-box">
-          <div class="metric-label">Source Files</div>
-          <div class="metric-value">5 Files</div>
+          <div class="metric-label">Files in src/</div>
+          <div class="metric-value">7 Files</div>
+          <div class="metric-sub">10 files total</div>
         </div>
         <div class="metric-box">
           <div class="metric-label">Code Volume</div>
-          <div class="metric-value">178 Lines</div>
+          <div class="metric-value">538 Lines</div>
+          <div class="metric-sub">210 lines JS/JSX</div>
         </div>
         <div class="metric-box">
           <div class="metric-label">Dependencies</div>
           <div class="metric-value">Zero UI Bloat</div>
+          <div class="metric-sub">Pure semantic HTML</div>
         </div>
       </div>
 
@@ -278,7 +389,7 @@
   </div>
 
   <div class="footer">
-    <p>Repository: <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair" target="_blank">github.com/RadiantHAL/task-manager-vibe-vs-pair</a></p>
+    <p>Repository: <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair" target="_blank">github.com/RadiantHAL/task-manager-vibe-vs-pair</a> · Pull Request: <a href="https://github.com/RadiantHAL/task-manager-vibe-vs-pair/pull/1" target="_blank">PR #1</a></p>
     <p style="margin-top: 6px; font-size: 12px; color: #64748b;">Both applications adhere strictly to the exact 3-feature specification with zero additions and zero removals.</p>
   </div>
 </body>
